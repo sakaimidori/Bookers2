@@ -1,0 +1,43 @@
+<!--ユーザー情報-->
+<h2>User info</h2>
+  <p><%= image_tag @user.get_profile_image(100,100) %></p>
+  <table>
+    <tr>
+      <th>name</th>
+      <th><%= @user.name %></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <th><%= @user.introduction %></th>
+    </tr>
+  </table>
+
+
+
+
+<!--投稿機能-->
+<h2>New book</h2>
+<%= form_with model: @book do |f| %>
+  <h4>Title</h4>
+    <%= f.text_field :title %>
+  <h4>Opinion</h4>
+    <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
+<% end %>
+
+<!--ユーザー一覧-->
+<h2>Users</h2>
+<table>
+  <tr>
+    <th>image</th>
+    <th>name</th>
+  </tr>
+
+  <% @users.each  do |user| %>
+    <tr>
+      <td><%= image_tag user.get_profile_image(80,80) %></td>
+      <td><%= user.name %></td>
+      <td><%= link_to "Show",user_path(user.id) %></td>
+    </tr>
+  <% end %>
+</table>
