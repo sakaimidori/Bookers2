@@ -1,65 +1,70 @@
-<!--バリデーションメッセージ-->
-<% if @book.errors.any? %>
-  <%= @book.errors.count %>errors prohibited this book from being saved:
-
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-
-<% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
 
 
 
+      <!--バリデーションメッセージ-->
+      <% if @book.errors.any? %>
+        <%= @book.errors.count %>errors prohibited this book from being saved:
 
-<!--ユーザー情報-->
-<h2>User info</h2>
-  <p></p>
-  <table>
-    <tr>
-      <th>name</th>
-      <th></th>
-    </tr>
-    <tr>
-      <th>introduction</th>
-      <th></th>
-    </tr>
-  </table>
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
 
+      <% end %>
 
-<!--投稿機能-->
-<h2>New book</h2>
-  <%= form_with model:@book, method: :post do |f| %>
+      <!--ユーザー情報-->
+      <h2>User info</h2>
+        <p></p>
+        <table>
+          <tr>
+            <th>name</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th></th>
+          </tr>
+        </table>
 
-    <h4>Title</h4>
-      <%= f.text_field :title %>
-    <h4>Opinion</h4>
-      <%= f.text_area :body %><br />
-    <%= f.submit 'Create Book' %>
+      <!--投稿機能-->
+      <h2>New book</h2>
+        <%= form_with model:@book, method: :post do |f| %>
 
-  <% end %>
+          <h4>Title</h4>
+            <%= f.text_field :title %>
+          <h4>Opinion</h4>
+            <%= f.text_area :body %><br />
+          <%= f.submit 'Create Book',class: "btn btn-success" %>
 
-<!--一覧機能-->
-<h2>Books</h2>
-  <table>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Opinion</th>
-    </tr>
+        <% end %>
+    </div>
 
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= image_tag book.user.get_profile_image(80,80) %></td>
-        <td> <%= link_to book_path(book.id) do %>
-               <%= book.title %>
-            <% end %>
-        </td>
-        <td><%= book.body %></td>
-      </tr>
-    <% end %>
-  </table>
+      <!--投稿一覧-->
+      <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+        <table class="table">
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
 
+          <% @books.each do |book| %>
+            <tr>
+              <td><%= image_tag book.user.get_profile_image(80,80) %></td>
+              <td> <%= link_to book_path(book.id) do %>
+                     <%= book.title %>
+                  <% end %>
+              </td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+        </table>
+  </div>
+</div>
 
 
